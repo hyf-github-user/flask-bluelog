@@ -20,3 +20,14 @@ class BaseConfig(object):
     # mysql + pymysql://user:password@hostip:port/databasename
     SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:hu15879093053@localhost:3306/bluelog'
     SQLALCHEMY_TRACK_MODIFICATIONS = False  # True时会追踪对象修改并且发送信号,需要额外的内存
+
+
+# 俩种配置
+class DevelopmentConfig(BaseConfig):
+    ENV = 'development'
+    DEBUG = True
+
+
+class ProductionConfig(BaseConfig):
+    ENV = 'production'
+    DEBUG = False
