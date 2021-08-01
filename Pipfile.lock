@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "249615f8a818a770953db100bd2c01e76fa3af72e13ea3fd361b7766ee02fe2f"
+            "sha256": "40257bc42a6bac486488220f4a54017966ee9a2be2bf40298b2fc4dcdc7a78f8"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -120,11 +120,11 @@
         },
         "importlib-metadata": {
             "hashes": [
-                "sha256:01bd9dacafffebd89b0c00ba24d2704322c3e4c6996a9120d0a1bdbdc08e8bd2",
-                "sha256:75858eea2febdbbaf83e2242270a29aba654e7fbf34de4a559e2f3873878eba4"
+                "sha256:0645585859e9a6689c523927a5032f2ba5919f1f7d0e84bd4533312320de1ff9",
+                "sha256:51c6635429c77cf1ae634c997ff9e53ca3438b495f10a55ba28594dd69764a8b"
             ],
             "markers": "python_version < '3.8'",
-            "version": "==4.6.2"
+            "version": "==4.6.3"
         },
         "itsdangerous": {
             "hashes": [
@@ -133,6 +133,13 @@
             ],
             "markers": "python_version >= '3.6'",
             "version": "==2.0.1"
+        },
+        "jieba": {
+            "hashes": [
+                "sha256:055ca12f62674fafed09427f176506079bc135638a14e23e25be909131928db2"
+            ],
+            "index": "pypi",
+            "version": "==0.42.1"
         },
         "jinja2": {
             "hashes": [
