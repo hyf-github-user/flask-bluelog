@@ -7,7 +7,6 @@ name = "pypi"
 flask = "*"
 flask-script = "*"
 flask-migrate = "==2.5.3"
-jieba = "*"
 
 [dev-packages]
 
