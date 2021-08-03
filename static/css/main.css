@@ -1,0 +1,80 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html,
+body {
+  height: 100%;
+  background: #f7f7f7;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+.wrap {
+  min-width: 100%;
+  background: #f7f7f7;
+}
+.row_flex {
+  width: 100%;
+}
+.message {
+  text-align: center;
+}
+.message h1 {
+  padding-top: 60px;
+  padding-bottom: 30px;
+  font-size: 81px;
+  line-height: 63px;
+  font-weight: 600;
+}
+.message h1 span {
+  font-size: 105px;
+  font-weight: 300;
+  color: #f1734c;
+}
+.message p {
+  font-size: 14px;
+  line-height: 21px;
+  color: #9c9694;
+  max-width: 620px;
+  padding: 0 20px;
+  margin: 0 auto;
+  display: block;
+}
+.scene {
+  display: block;
+  margin: 0 auto;
+  max-width: 1180px;
+  position: relative;
+}
+.scene img {
+  max-width: 100%;
+}
+.scene .charecter {
+  position: absolute;
+  left: 34.6610169492%;
+  bottom: 0;
+  width: 37.4788494078%;
+}
+.scene .charecter img {
+  max-width: 100%;
+}
+.hand {
+  width: 21.2189616253%;
+  position: absolute;
+  right: 9.2550790068%;
+  top: 41.067761807%;
+  -webkit-transform-origin: 90% 100%;
+  transform-origin: 90% 100%;
+  -webkit-animation: hand 3s linear 0s infinite;
+  animation: hand 3s linear 0s infinite;
+}
+.eye {
+  width: 33.6343115124%;
+  position: absolute;
+  right: 11.5124153499%;
+  top: 22.5733634312%;
+  height: 54px;
+}
