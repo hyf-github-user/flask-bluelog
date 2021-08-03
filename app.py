@@ -16,6 +16,11 @@ migrate = Migrate(app=app, db=db)
 manager.add_command('db', MigrateCommand)
 
 
+@app.route('/')
+def index():
+    return render_template('errors/404.html')
+
+
 # 设置404页面
 @app.errorhandler(404)
 def page_not_found(e):
