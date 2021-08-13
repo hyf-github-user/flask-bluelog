@@ -1,7 +1,8 @@
 from flask import render_template
 from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager
-
+# 导入模型
+from bluelog.models import Admin, Comment, Category, Post
 from bluelog import create_app
 from exts import db
 

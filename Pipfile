@@ -7,6 +7,13 @@ name = "pypi"
 flask = "==1.1.2"
 flask-script = "*"
 flask-migrate = "==2.5.3"
+flask-ckeditor = "*"
+flask-moment = "*"
+bootstrap-flask = "*"
+flask-wtf = "*"
+flask-mail = "*"
+flask-login = "*"
+pymysql = "*"
 
 [dev-packages]
 
