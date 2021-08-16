@@ -32,9 +32,10 @@ def register_extensions(app):
     # 初始化时间与日期
     moment.init_app(app=app)
 
+
 # 注册蓝图
 def register_blueprints(app):
     # 注册蓝图
     app.register_blueprint(blog_bp)
-    app.register_blueprint(auth_bp)
-    app.register_blueprint(admin_bp)
+    app.register_blueprint(admin_bp, url_prefix='/admin')
+    app.register_blueprint(auth_bp, url_prefix='/auth')
