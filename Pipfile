@@ -14,6 +14,7 @@ flask-wtf = "*"
 flask-mail = "*"
 flask-login = "*"
 pymysql = "*"
+faker = "*"
 
 [dev-packages]
 

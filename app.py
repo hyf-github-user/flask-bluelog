@@ -19,7 +19,7 @@ manager.add_command('db', MigrateCommand)
 
 @app.route('/')
 def index():
-    return render_template('errors/404.html')
+    return render_template('base.html')
 
 
 # 设置404页面

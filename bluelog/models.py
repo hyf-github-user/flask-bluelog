@@ -7,6 +7,7 @@ from datetime import datetime
 from exts import db
 
 
+# 博客用户模型
 class Admin(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20))  # 管理员的名称
@@ -32,8 +33,9 @@ class Post(db.Model):
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
     # 定义模型之间的关系
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
-    comments = db.relationship('Comment', back_populates='post', cascade='all,delete-orphan')
     category = db.relationship('Category', back_populates='posts')
+    # 文章与评论是一对多关系
+    comments = db.relationship('Comment', back_populates='post', cascade='all,delete-orphan')
 
 
 # 评论模型
@@ -45,12 +47,13 @@ class Comment(db.Model):
     body = db.Column(db.Text)
     from_admin = db.Column(db.Boolean, default=False)  # 判断是否是管理员的评论
     reviewed = db.Column(db.Boolean, default=False)  # 判断是否通过审核
-
+    # 自身id为外键(也叫邻接列表关系)
     replied_id = db.Column(db.Integer, db.ForeignKey('comment.id'))
+    # remote_side对应多个回复对应一个评论
     replied = db.relationship('Comment', back_populates='replies', remote_side=[id])
     # cascade='all',当父评论删除之后,所有的子评论全部删除
     replies = db.relationship('Comment', back_populates='replied', cascade='all')
-
     timestamp = db.Column(db.DateTime, default=datetime.utcnow, index=True)
+    # 文章与评论是一对多关系
     post_id = db.Column(db.Integer, db.ForeignKey('post.id'))
     post = db.relationship('Post', back_populates='comments')
