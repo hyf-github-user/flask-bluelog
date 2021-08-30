@@ -13,6 +13,5 @@ MySQL(得已知用户密码,还得创建bluelog数据库)
 4. python app.py db migrate  迁移数据库
 5. python app.py db upgrade  同步数据库
 6. python app.py runserver 默认localhost:5000
-7. 
 
 
