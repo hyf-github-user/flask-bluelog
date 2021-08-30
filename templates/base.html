@@ -38,7 +38,7 @@
 <main class="container">
     {#    渲染flash消息#}
     {% for message in get_flashed_messages(with_categories=True) %}
-{#        bootstrap提供八个flash样式alert-primary...#}
+        {#        bootstrap提供八个flash样式alert-primary...#}
         <div class="alert alert-{{ message[0] }}" role="alert">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
             {{ message[1] }}

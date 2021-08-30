@@ -4,11 +4,14 @@
 # 管理员模型
 from datetime import datetime
 
+from flask_login import UserMixin
+from werkzeug.security import generate_password_hash, check_password_hash
+
 from exts import db
 
 
 # 博客用户模型
-class Admin(db.Model):
+class Admin(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20))  # 管理员的名称
     password_hash = db.Column(db.String(128))  # 密码的哈希值
@@ -16,6 +19,13 @@ class Admin(db.Model):
     blog_sub_title = db.Column(db.String(100))  # 博客的副标题
     name = db.Column(db.String(30))  # 管理员名字
     about = db.Column(db.Text)  # 管理员简介
+
+    # 设置密码与验证密码
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
+
+    def validate_password(self, password):
+        return check_password_hash(self.password_hash, password)
 
 
 # 分类模型
@@ -57,3 +67,9 @@ class Comment(db.Model):
     # 文章与评论是一对多关系
     post_id = db.Column(db.Integer, db.ForeignKey('post.id'))
     post = db.relationship('Post', back_populates='comments')
+
+
+class Link(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(30))
+    url = db.Column(db.String(255))

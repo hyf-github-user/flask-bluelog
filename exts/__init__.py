@@ -17,4 +17,12 @@ moment = Moment()
 ckeditor = CKEditor()
 # 电子邮件
 mail = Mail()
+# flask-login的使用
 login_manager = LoginManager()
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    from bluelog.models import Admin
+    user = Admin.query.get(int(user_id))
+    return user
