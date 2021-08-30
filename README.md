@@ -1,5 +1,4 @@
-# flask-bluelog
-
+# flask-bluelog(因学业繁忙开始比较慢)
 #### 目标
 写一个最好的博客系统
 
