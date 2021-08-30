@@ -61,6 +61,7 @@ def register_template_context(app):
 
 # 生成命令
 def register_commands(app):
+    # 初始化数据库命令
     @app.cli.command()
     @click.option('--drop', is_flag=True, help='Create after drop.')
     def initdb(drop):
@@ -72,6 +73,7 @@ def register_commands(app):
         db.create_all()
         click.echo('初始化数据库')
 
+    # 初始化蓝客设置管理员密码的命令
     @app.cli.command()
     @click.option('--username', prompt=True, help='The username used to login.')
     @click.option('--password', prompt=True, hide_input=True,
@@ -108,6 +110,7 @@ def register_commands(app):
         db.session.commit()
         click.echo('Done.')
 
+    # 生成虚拟数据命令
     @app.cli.command()
     @click.option('--category', default=10, help='Quantity of categories, default is 10.')
     @click.option('--post', default=50, help='Quantity of posts, default is 50.')
