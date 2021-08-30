@@ -7,8 +7,12 @@
 MySQL(得已知用户密码,还得创建bluelog数据库)
 
 #### 快速使用
-1. xxxxxx
-2. xxxxxx
-3. xxxxxx
+1. pipenv -dev --dev --python=3.7   pipenv下载相关依赖
+2. pipenv shell        进入pipenv虚拟环境shell
+3. python app.py db init     初始化数据库
+4. python app.py db migrate  迁移数据库
+5. python app.py db upgrade  同步数据库
+6. python app.py runserver 默认localhost:5000
+7. 
 
 
