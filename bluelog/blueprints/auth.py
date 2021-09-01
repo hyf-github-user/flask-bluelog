@@ -23,7 +23,7 @@ def login():
     form = LoginForm()
     # 检验表单数据
     if form.validate_on_submit():
-        #获取输入表单的数据
+        # 获取输入表单的数据
         username = form.username.data
         password = form.password.data
         remember = form.remember.data
@@ -44,7 +44,7 @@ def login():
 
 # 退出登录
 @auth_bp.route('/logout')
-@login_required
+@login_required   # 确保用户已经登录
 def logout():
     logout_user()
     flash('退出登录成功!', 'info')
