@@ -93,10 +93,10 @@ def register_commands(app):
             click.echo('Creating the temporary administrator account...')
             admin = Admin(
                 username=username,
-                blog_title='Bluelog',
-                blog_sub_title="No, I'm the real thing.",
+                blog_title='蓝客',
+                blog_sub_title="我是副标题",
                 name='Admin',
-                about='Anything about you.'
+                about='我是简介呀!'
             )
             admin.set_password(password)
             db.session.add(admin)
@@ -104,7 +104,7 @@ def register_commands(app):
         category = Category.query.first()
         if category is None:
             click.echo('Creating the default category...')
-            category = Category(name='Default')
+            category = Category(name='默认')
             db.session.add(category)
 
         db.session.commit()

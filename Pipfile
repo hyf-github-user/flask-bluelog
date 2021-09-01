@@ -15,6 +15,7 @@ flask-mail = "*"
 flask-login = "*"
 pymysql = "*"
 faker = "*"
+email-validator = "*"
 
 [dev-packages]
 
