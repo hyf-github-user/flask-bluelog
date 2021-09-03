@@ -31,6 +31,7 @@ def new_post():
 @admin_bp.route('/post/<int:post_id>/edit', methods=['GET', 'POST'])
 @login_required
 def edit_post(post_id):
+    print(post_id)
     pass
 
 
@@ -38,6 +39,7 @@ def edit_post(post_id):
 @admin_bp.route('/post/<int:post_id>/delete', methods=['POST'])
 @login_required
 def delete_post(post_id):
+    print(post_id)
     pass
 
 
@@ -45,6 +47,7 @@ def delete_post(post_id):
 @admin_bp.route('/post/<int:post_id>/set-comment', methods=['POST'])
 @login_required
 def set_comment(post_id):
+    print(post_id)
     pass
 
 
@@ -59,6 +62,7 @@ def manage_comment():
 @admin_bp.route('/comment/<int:comment_id>/approve', methods=['POST'])
 @login_required
 def approve_comment(comment_id):
+    print(comment_id)
     pass
 
 
@@ -66,6 +70,7 @@ def approve_comment(comment_id):
 @admin_bp.route('/comment/<int:comment_id>/delete', methods=['POST'])
 @login_required
 def delete_comment(comment_id):
+    print(comment_id)
     pass
 
 
@@ -87,6 +92,7 @@ def new_category():
 @admin_bp.route('/category/<int:category_id>/edit', methods=['GET', 'POST'])
 @login_required
 def edit_category(category_id):
+    print(category_id)
     pass
 
 
@@ -94,6 +100,7 @@ def edit_category(category_id):
 @admin_bp.route('/category/<int:category_id>/delete', methods=['POST'])
 @login_required
 def delete_category(category_id):
+    print(category_id)
     pass
 
 
@@ -115,6 +122,7 @@ def new_link():
 @admin_bp.route('/link/<int:link_id>/edit', methods=['GET', 'POST'])
 @login_required
 def edit_link(link_id):
+    print(link_id)
     pass
 
 
@@ -122,12 +130,14 @@ def edit_link(link_id):
 @admin_bp.route('/link/<int:link_id>/delete', methods=['POST'])
 @login_required
 def delete_link(link_id):
+    print(link_id)
     pass
 
 
 # 管理员上传文件
 @admin_bp.route('/uploads/<path:filename>')
 def get_image(filename):
+    print(filename)
     pass
 
 

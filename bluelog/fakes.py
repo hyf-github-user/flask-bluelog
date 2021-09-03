@@ -15,12 +15,14 @@ fake = Faker()
 # 生成管理员信息
 def fake_admin():
     admin = Admin(
-        username='admin',
+        username='hyf',
         blog_title='我是一个大标题',
         blog_sub_title='我是一个副标题',
         name='fake-name',
         about='我是个人介绍'
     )
+    # 设置密码
+    admin.set_password('hu15879093053')
     # 提交到数据库
     db.session.add(admin)
     db.session.commit()

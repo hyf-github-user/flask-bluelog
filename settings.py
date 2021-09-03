@@ -20,6 +20,8 @@ class BaseConfig(object):
     # mysql + pymysql://user:password@hostip:port/databasename
     SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:hu15879093053@localhost:3306/bluelog'
     SQLALCHEMY_TRACK_MODIFICATIONS = False  # True时会追踪对象修改并且发送信号,需要额外的内存
+    # 每页的页数
+    BLUELOG_POST_PER_PAGE=5
 
 
 # 俩种配置
