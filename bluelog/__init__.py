@@ -6,13 +6,13 @@ from flask import Flask
 from bluelog.blueprints.admin import admin_bp
 from bluelog.blueprints.auth import auth_bp
 from bluelog.blueprints.blog import blog_bp
-from bluelog.models import Admin, Category
-from exts import db, bootstrap, mail, ckeditor, moment, login_manager
+from bluelog.models import Admin, Category, Link
+from exts import db, bootstrap, mail, ckeditor, moment, login_manager, toolbar, csrf
 from settings import DevelopmentConfig
 
 
 def create_app():
-    app = Flask('bluelog', template_folder='../templates', static_folder='../static')
+    app = Flask('bluelog')
     app.config.from_object(DevelopmentConfig)
     # 初始化扩展
     register_extensions(app=app)
@@ -22,6 +22,16 @@ def create_app():
     register_template_context(app=app)
     # 注册命令
     register_commands(app=app)
+    # 邮箱配置
+    app.config['MAIL_DEBUG'] = True  # 开启debug，便于调试看信息
+    app.config['MAIL_SUPPRESS_SEND'] = False  # 发送邮件，为True则不发送
+    app.config['MAIL_SERVER'] = 'smtp.qq.com'  # 电子邮件服务器的主机名或IP地址
+    app.config['MAIL_PORT'] = 465  # 电子邮件服务器的端口
+    app.config['MAIL_USE_TLS'] = False  # 启用传输层安全协议
+    app.config['MAIL_USE_SSL'] = True  # 启用安全套接层协议
+    app.config['MAIL_USERNAME'] = '1348977728@qq.com'  # 邮件账户用户名
+    app.config['MAIL_PASSWORD'] = 'tqekpctqcoxkffeg'  # 邮件账户的密码
+    # app.config['MAIL_DEFAULT_SENDER'] = '1348977728@qq.com'  # 填邮箱，默认发送者
     return app
 
 
@@ -38,7 +48,11 @@ def register_extensions(app):
     # 初始化时间与日期
     moment.init_app(app=app)
     # 初始化flask-login
-    login_manager.init_app(app)
+    login_manager.init_app(app=app)
+    # 初始化debug
+    toolbar.init_app(app=app)
+    # csrf验证
+    csrf.init_app(app=app)
 
 
 # 注册蓝图
@@ -56,7 +70,8 @@ def register_template_context(app):
         # 查找admin与categories
         admin = Admin.query.first()
         categories = Category.query.order_by(Category.name).all()
-        return dict(admin=admin, categories=categories)
+        links = Link.query.order_by(Link.name).all()
+        return dict(admin=admin, categories=categories, links=links)
 
 
 # 生成命令

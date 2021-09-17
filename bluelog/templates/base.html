@@ -16,6 +16,7 @@
     {% endblock head %}
 </head>
 <body>
+{#设置最上面的导航栏#}
 {% block nav %}
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
@@ -45,6 +46,7 @@
     {% endfor %}
     {% block content %}{% endblock content %}
     {% block footer %}
+        {#        脚注#}
         <footer>
             <p class="float-left">
                 <small> &copy; 2021 <a href="http://huyinfu.top/user" title="Written by HYF">HYF</a> -
