@@ -1,30 +1,65 @@
 # 作者：我只是代码的搬运工
 # coding:utf-8
-from flask import Blueprint
+from flask import Blueprint, render_template
 from flask_login import login_required
 
 admin_bp = Blueprint('admin', __name__)
-
-
-# 个人设置的视图
-@admin_bp.route('/settings', methods=['GET', 'POST'])
-@login_required  # 确保管理员已登录
-def settings():
-    pass
-
-
-# 管理文章的视图
-@admin_bp.route('/post/manage')
-@login_required
-def manage_post():
-    pass
 
 
 # 管理员创建文章
 @admin_bp.route('/post/new', methods=['GET', 'POST'])
 @login_required  # 确保管理员已登录
 def new_post():
-    pass
+    return "我是创建文章,正在开发中~~~"
+
+
+# 管理员创建分类
+@admin_bp.route('/category/new', methods=['GET', 'POST'])
+@login_required
+def new_category():
+    return "我是创建分类,正在开发中~~~"
+
+
+# 管理员创建链接
+@admin_bp.route('/link/new', methods=['GET', 'POST'])
+@login_required
+def new_link():
+    return "我是创建友情链接,正在开发中~~~"
+
+
+# 管理文章的视图
+@admin_bp.route('/post/manage')
+@login_required
+def manage_post():
+    return "我是管理文章,正在开发中~~~"
+
+
+# 管理员管理评论
+@admin_bp.route('/comment/manage')
+@login_required
+def manage_comment():
+    return "我是管理评论的,正在开发中~~~"
+
+
+# 管理员管理分类
+@admin_bp.route('/category/manage')
+@login_required
+def manage_category():
+    return "我是管理分类的,正在开发中~~~"
+
+
+# 管理员管理链接
+@admin_bp.route('/link/manage')
+@login_required
+def manage_link():
+    return "我是管理友情链接的,正在开发中~~~"
+
+
+# 个人设置的视图
+@admin_bp.route('/settings', methods=['GET', 'POST'])
+@login_required  # 确保管理员已登录
+def settings():
+    return "我是设置页面,正在开发中!"
 
 
 # 管理员编辑文章
@@ -51,13 +86,6 @@ def set_comment(post_id):
     pass
 
 
-# 管理员管理评论
-@admin_bp.route('/comment/manage')
-@login_required
-def manage_comment():
-    pass
-
-
 # 管理员通过评论
 @admin_bp.route('/comment/<int:comment_id>/approve', methods=['POST'])
 @login_required
@@ -74,20 +102,6 @@ def delete_comment(comment_id):
     pass
 
 
-# 管理员管理分类
-@admin_bp.route('/category/manage')
-@login_required
-def manage_category():
-    pass
-
-
-# 管理员创建分类
-@admin_bp.route('/category/new', methods=['GET', 'POST'])
-@login_required
-def new_category():
-    pass
-
-
 # 管理员编辑分类
 @admin_bp.route('/category/<int:category_id>/edit', methods=['GET', 'POST'])
 @login_required
@@ -101,20 +115,6 @@ def edit_category(category_id):
 @login_required
 def delete_category(category_id):
     print(category_id)
-    pass
-
-
-# 管理员管理链接
-@admin_bp.route('/link/manage')
-@login_required
-def manage_link():
-    pass
-
-
-# 管理员创建链接
-@admin_bp.route('/link/new', methods=['GET', 'POST'])
-@login_required
-def new_link():
     pass
 
 

@@ -30,6 +30,48 @@
                     {{ render_nav_item('blog.index', 'Home') }}
                     {{ render_nav_item('blog.about', '关于我') }}
                 </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    {% if current_user.is_authenticated %}
+                        {# 最上面的导航栏设置#}
+                        <li class="nav-item dropdown">
+                            {# 相关创建功能#}
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-haspopup="true"
+                               aria-expanded="false">
+                                创建 <span class="caret"></span>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ url_for('admin.new_post') }}">文章</a>
+                                <a class="dropdown-item" href="{{ url_for('admin.new_category') }}">分类</a>
+                                <a class="dropdown-item" href="{{ url_for('admin.new_link') }}">友情链接</a>
+                            </div>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            {# 管理员管理功能#}
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-haspopup="true"
+                               aria-expanded="false">
+                                管理 <span class="caret"></span>
+                                {% if unread_comments %}
+                                    <span class="badge badge-success">new</span>
+                                {% endif %}
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ url_for('admin.manage_post') }}">文章</a>
+                                <a class="dropdown-item" href="{{ url_for('admin.manage_category') }}">分类</a>
+                                <a class="dropdown-item" href="{{ url_for('admin.manage_comment') }}">
+                                    评论
+                                    {% if unread_comments %}
+                                        <span class="badge badge-success">{{ unread_comments }}</span>
+                                    {% endif %}
+                                </a>
+                                <a class="dropdown-item" href="{{ url_for('admin.manage_link') }}">友情链接</a>
+                            </div>
+                        </li>
+                        {{ render_nav_item('admin.settings', '设置') }}
+                    {% endif %}
+                </ul>
             </div>
         </div>
     </nav>
