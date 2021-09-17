@@ -32,6 +32,29 @@ def new_post():
     return render_template('admin/new_post.html', form=form)
 
 
+# 管理文章的视图
+@admin_bp.route('/post/manage')
+@login_required
+def manage_post():
+    return "我是管理文章,正在开发中~~~"
+
+
+# 管理员编辑文章
+@admin_bp.route('/post/<int:post_id>/edit', methods=['GET', 'POST'])
+@login_required
+def edit_post(post_id):
+    print(post_id)
+    pass
+
+
+# 管理员删除文章
+@admin_bp.route('/post/<int:post_id>/delete', methods=['POST'])
+@login_required
+def delete_post(post_id):
+    print(post_id)
+    pass
+
+
 # 管理员创建分类
 @admin_bp.route('/category/new', methods=['GET', 'POST'])
 @login_required
@@ -92,14 +115,31 @@ def new_link():
 @admin_bp.route('/link/manage')
 @login_required
 def manage_link():
-    return "我是管理友情链接的,正在开发中~~~"
+    return render_template('admin/manage_link.html')
 
 
-# 管理文章的视图
-@admin_bp.route('/post/manage')
+# 管理员编辑链接
+@admin_bp.route('/link/<int:link_id>/edit', methods=['GET', 'POST'])
 @login_required
-def manage_post():
-    return "我是管理文章,正在开发中~~~"
+def edit_link(link_id):
+    print(link_id)
+    pass
+
+
+# 管理员删除链接
+@admin_bp.route('/link/<int:link_id>/delete', methods=['POST'])
+@login_required
+def delete_link(link_id):
+    print(link_id)
+    pass
+
+
+# 管理员发表评论
+@admin_bp.route('/post/<int:post_id>/set-comment', methods=['POST'])
+@login_required
+def set_comment(post_id):
+    print(post_id)
+    pass
 
 
 # 管理员管理评论
@@ -107,6 +147,22 @@ def manage_post():
 @login_required
 def manage_comment():
     return "我是管理评论的,正在开发中~~~"
+
+
+# 管理员通过评论
+@admin_bp.route('/comment/<int:comment_id>/approve', methods=['POST'])
+@login_required
+def approve_comment(comment_id):
+    print(comment_id)
+    pass
+
+
+# 管理员删除评论
+@admin_bp.route('/comment/<int:comment_id>/delete', methods=['POST'])
+@login_required
+def delete_comment(comment_id):
+    print(comment_id)
+    pass
 
 
 # 个人设置的视图
@@ -130,62 +186,6 @@ def settings():
     form.blog_sub_title = current_user.blog_sub_title
     form.about = current_user.about
     return render_template('admin/settings.html', form=form)
-
-
-# 管理员编辑文章
-@admin_bp.route('/post/<int:post_id>/edit', methods=['GET', 'POST'])
-@login_required
-def edit_post(post_id):
-    print(post_id)
-    pass
-
-
-# 管理员删除文章
-@admin_bp.route('/post/<int:post_id>/delete', methods=['POST'])
-@login_required
-def delete_post(post_id):
-    print(post_id)
-    pass
-
-
-# 管理员发表评论
-@admin_bp.route('/post/<int:post_id>/set-comment', methods=['POST'])
-@login_required
-def set_comment(post_id):
-    print(post_id)
-    pass
-
-
-# 管理员通过评论
-@admin_bp.route('/comment/<int:comment_id>/approve', methods=['POST'])
-@login_required
-def approve_comment(comment_id):
-    print(comment_id)
-    pass
-
-
-# 管理员删除评论
-@admin_bp.route('/comment/<int:comment_id>/delete', methods=['POST'])
-@login_required
-def delete_comment(comment_id):
-    print(comment_id)
-    pass
-
-
-# 管理员编辑链接
-@admin_bp.route('/link/<int:link_id>/edit', methods=['GET', 'POST'])
-@login_required
-def edit_link(link_id):
-    print(link_id)
-    pass
-
-
-# 管理员删除链接
-@admin_bp.route('/link/<int:link_id>/delete', methods=['POST'])
-@login_required
-def delete_link(link_id):
-    print(link_id)
-    pass
 
 
 # 管理员上传文件
