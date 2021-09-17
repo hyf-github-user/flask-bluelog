@@ -16,6 +16,8 @@ basedir = os.path.dirname(__file__)
 class BaseConfig(object):
     # session加密
     SECRET_KEY = os.getenv('SECRET_KEY', 'dev key')
+    # debug设置
+    DEBUG_TB_INTERCEPT_REDIRECTS = False
     # 配置数据库连接
     # mysql + pymysql://user:password@hostip:port/databasename
     SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:hu15879093053@localhost:3306/bluelog'
@@ -28,8 +30,15 @@ class BaseConfig(object):
     BLUELOG_COMMENT_PER_PAGE = 3
     # 邮箱
     BLUELOG_EMAIL = '1348977728@qq.com'
-    DEBUG_TB_INTERCEPT_REDIRECTS = False
-    BLUELOG_EMAIL = os.getenv('BLUELOG_EMAIL')
+    # 邮箱配置
+    MAIL_DEBUG = True  # 开启debug，便于调试看信息
+    MAIL_SUPPRESS_SEND = False  # 发送邮件，为True则不发送
+    MAIL_SERVER = 'smtp.qq.com'  # 电子邮件服务器的主机名或IP地址
+    MAIL_PORT = 465  # 电子邮件服务器的端口
+    MAIL_USE_TLS = False  # 启用传输层安全协议
+    MAIL_USE_SSL = True  # 启用安全套接层协议
+    MAIL_USERNAME = '1348977728@qq.com'  # 邮件账户用户名
+    MAIL_PASSWORD = 'tqekpctqcoxkffeg'  # 邮件账户的密码
 
 
 # 俩种配置

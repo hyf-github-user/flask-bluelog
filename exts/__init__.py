@@ -26,6 +26,8 @@ login_manager = LoginManager()
 toolbar = DebugToolbarExtension()
 # csrf认证
 csrf = CSRFProtect()
+# 富文本编辑器
+ckeditor = CKEditor()
 
 
 @login_manager.user_loader

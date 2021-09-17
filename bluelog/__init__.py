@@ -22,15 +22,10 @@ def create_app():
     register_template_context(app=app)
     # 注册命令
     register_commands(app=app)
-    # 邮箱配置
-    app.config['MAIL_DEBUG'] = True  # 开启debug，便于调试看信息
-    app.config['MAIL_SUPPRESS_SEND'] = False  # 发送邮件，为True则不发送
-    app.config['MAIL_SERVER'] = 'smtp.qq.com'  # 电子邮件服务器的主机名或IP地址
-    app.config['MAIL_PORT'] = 465  # 电子邮件服务器的端口
-    app.config['MAIL_USE_TLS'] = False  # 启用传输层安全协议
-    app.config['MAIL_USE_SSL'] = True  # 启用安全套接层协议
-    app.config['MAIL_USERNAME'] = '1348977728@qq.com'  # 邮件账户用户名
-    app.config['MAIL_PASSWORD'] = 'tqekpctqcoxkffeg'  # 邮件账户的密码
+
+    # 富文本编辑器配置
+    # app.config['CKEDITOR_SERVE_LOCAL'] = True
+    # app.config['CKEDITOR_FILE_UPLOADER'] = 'admin.upload_for_ckeditor'
     # app.config['MAIL_DEFAULT_SENDER'] = '1348977728@qq.com'  # 填邮箱，默认发送者
     return app
 

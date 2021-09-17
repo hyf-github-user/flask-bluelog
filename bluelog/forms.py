@@ -51,11 +51,20 @@ class CategoryForm(MyBaseForm):
 
 
 # 评论表单
-class CommentForm(FlaskForm):
+class CommentForm(MyBaseForm):
     author = StringField('用户名', validators=[DataRequired(), Length(1, 30)])
     email = StringField('Email', validators=[DataRequired(), Email(), Length(1, 254)])
     site = StringField('地区', validators=[Optional(), URL(), Length(0, 255)])
     body = TextAreaField('评论', validators=[DataRequired()])
+    submit = SubmitField()
+
+
+# 设置表单
+class SettingForm(MyBaseForm):
+    name = StringField('姓名', validators=[DataRequired(), Length(1, 30)])
+    blog_title = StringField('大标题', validators=[DataRequired(), Length(1, 60)])
+    blog_sub_title = StringField('小标题', validators=[DataRequired(), Length(1, 100)])
+    about = CKEditorField('关于我', validators=[DataRequired()])
     submit = SubmitField()
 
 
@@ -64,3 +73,10 @@ class AdminCommentForm(CommentForm):
     author = HiddenField()  # 对应HTML <input type="hidden">
     email = HiddenField()
     site = HiddenField()
+
+
+# 友情链接表单
+class LinkForm(FlaskForm):
+    name = StringField('名称', validators=[DataRequired(), Length(1, 30)])
+    url = StringField('网址', validators=[DataRequired(), URL(), Length(1, 255)])
+    submit = SubmitField()
