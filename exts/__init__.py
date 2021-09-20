@@ -26,12 +26,17 @@ login_manager = LoginManager()
 toolbar = DebugToolbarExtension()
 # csrf认证
 csrf = CSRFProtect()
-# 富文本编辑器
-ckeditor = CKEditor()
 
 
+# 用户加载函数,判断当前是否登录,用于current_user
 @login_manager.user_loader
 def load_user(user_id):
     from bluelog.models import Admin
     user = Admin.query.get(int(user_id))
     return user
+
+
+# 当需要登录的路由退出登录时产生的警告
+login_manager.login_view = 'auth.login'
+login_manager.login_message = '请先登录!'
+login_manager.login_message_category = 'warning'

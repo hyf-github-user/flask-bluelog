@@ -41,6 +41,8 @@ class Post(db.Model):
     title = db.Column(db.String(60))
     body = db.Column(db.Text)
     timestamp = db.Column(db.DateTime, default=datetime.utcnow, index=True)
+    # 判断是否能评论
+    can_comment = db.Column(db.Boolean, default=True)
     # 定义模型之间的关系
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
     category = db.relationship('Category', back_populates='posts')

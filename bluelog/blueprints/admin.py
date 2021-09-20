@@ -1,6 +1,6 @@
 # 作者：我只是代码的搬运工
 # coding:utf-8
-from flask import Blueprint, flash, render_template, redirect, url_for
+from flask import Blueprint, flash, render_template, redirect, url_for, request, current_app
 from flask_login import login_required, current_user
 
 from bluelog.forms import PostForm, SettingForm, CategoryForm, LinkForm
@@ -36,7 +36,11 @@ def new_post():
 @admin_bp.route('/post/manage')
 @login_required
 def manage_post():
-    return "我是管理文章,正在开发中~~~"
+    # 对所有文章进行分类
+    page = request.args.get('page', 1, type=int)
+    pagination = Post.query.order_by(Post.timestamp.desc()).paginate(page, per_page=current_app.config['BLUELOG_MANAGE_POST_PER_PAGE'])
+    posts = pagination.items
+    return render_template('admin/manage_post.html', pagination=pagination, posts=posts, page=page)
 
 
 # 管理员编辑文章

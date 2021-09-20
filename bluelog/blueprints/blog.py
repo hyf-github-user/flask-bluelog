@@ -53,7 +53,7 @@ def show_category(category_id):
 
 
 # 文章详情路由
-@blog_bp.route('/post/<int:post_id>')
+@blog_bp.route('/post/<int:post_id>', methods=['GET', 'POST'])
 def show_post(post_id):
     # 根据id查找文章
     post = Post.query.get_or_404(post_id)
@@ -71,8 +71,8 @@ def show_post(post_id):
         form.author.data = current_user.name
         form.email.data = current_app.config['BLUELOG_EMAIL']
         form.site.data = url_for('blog.index')
-        from_admin = True   # 判断评论是否来自管理员
-        reviewed = True   # 判断管理员是否收到
+        from_admin = True  # 判断评论是否来自管理员
+        reviewed = True  # 判断管理员是否收到
     else:
         # 非管理员评论
         form = CommentForm()
@@ -89,6 +89,7 @@ def show_post(post_id):
             from_admin=from_admin, post=post, reviewed=reviewed)
         replied_id = request.args.get('reply')
         if replied_id:
+            # 查找需要回复的评论
             replied_comment = Comment.query.get_or_404(replied_id)
             comment.replied = replied_comment
             send_new_reply_email(replied_comment)
@@ -103,6 +104,7 @@ def show_post(post_id):
     return render_template('blog/post.html', post=post, pagination=pagination, form=form, comments=comments)
 
 
+# 回复评论,相对于一个中间站,把数据转发给show_post
 @blog_bp.route('/reply/comment/<int:comment_id>')
 def reply_comment(comment_id):
     comment = Comment.query.get_or_404(comment_id)
@@ -113,6 +115,7 @@ def reply_comment(comment_id):
         url_for('.show_post', post_id=comment.post_id, reply=comment_id, author=comment.author) + '#comment-form')
 
 
+# 切换主题的视图
 @blog_bp.route('/change-theme/<theme_name>')
 def change_theme(theme_name):
     if theme_name not in current_app.config['BLUELOG_THEMES'].keys():

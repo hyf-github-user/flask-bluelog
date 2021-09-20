@@ -17,16 +17,7 @@ migrate = Migrate(app=app, db=db)
 manager.add_command('db', MigrateCommand)
 
 
-# 设置404页面
-@app.errorhandler(404)
-def page_not_found(e):
-    return render_template('errors/404.html')
 
-
-# 设置500页面
-@app.errorhandler(500)
-def internal_server_error(e):
-    return render_template('errors/500.html')
 
 
 if __name__ == '__main__':

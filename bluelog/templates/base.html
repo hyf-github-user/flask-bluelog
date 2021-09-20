@@ -54,7 +54,7 @@
                                aria-expanded="false">
                                 管理 <span class="caret"></span>
                                 {% if unread_comments %}
-                                    <span class="badge badge-success">new</span>
+                                    <span class="badge badge-success">未读</span>
                                 {% endif %}
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -115,6 +115,8 @@
     <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
     {{ moment.include_moment(local_js=url_for('static', filename='js/moment-with-locales.min.js')) }}
+    {#    采用中文#}
+    {{ moment.lang('zh-CN') }}
 {% endblock %}
 </body>
 </html>

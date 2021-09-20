@@ -28,6 +28,8 @@ class BaseConfig(object):
     BLUELOG_CATEGORY_PER_PAGE = 3
     # 每页的评论数
     BLUELOG_COMMENT_PER_PAGE = 3
+    # 管理文章的分页数
+    BLUELOG_MANAGE_POST_PER_PAGE = 6
     # 邮箱
     BLUELOG_EMAIL = '1348977728@qq.com'
     # 邮箱配置
@@ -39,6 +41,11 @@ class BaseConfig(object):
     MAIL_USE_SSL = True  # 启用安全套接层协议
     MAIL_USERNAME = '1348977728@qq.com'  # 邮件账户用户名
     MAIL_PASSWORD = 'tqekpctqcoxkffeg'  # 邮件账户的密码
+    MAIL_DEFAULT_SENDER = '1348977728@qq.com'  # 填邮箱，默认发送者
+    # 主题设置
+    # ('theme name', 'display name')
+    BLUELOG_THEMES = {'perfect_blue': 'Perfect Blue', 'black_swan': 'Black Swan'}
+    BLUELOG_SLOW_QUERY_THRESHOLD = 1
 
 
 # 俩种配置

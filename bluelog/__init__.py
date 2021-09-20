@@ -1,12 +1,14 @@
 # 作者：我只是代码的搬运工
 # coding:utf-8
 import click
-from flask import Flask
+from flask import Flask, render_template
+from flask_login import current_user
+from flask_wtf.csrf import CSRFError
 
 from bluelog.blueprints.admin import admin_bp
 from bluelog.blueprints.auth import auth_bp
 from bluelog.blueprints.blog import blog_bp
-from bluelog.models import Admin, Category, Link
+from bluelog.models import Admin, Category, Link, Comment
 from exts import db, bootstrap, mail, ckeditor, moment, login_manager, toolbar, csrf
 from settings import DevelopmentConfig
 
@@ -22,7 +24,8 @@ def create_app():
     register_template_context(app=app)
     # 注册命令
     register_commands(app=app)
-
+    # 定义错误页面
+    register_errors(app=app)
     # 富文本编辑器配置
     # app.config['CKEDITOR_SERVE_LOCAL'] = True
     # app.config['CKEDITOR_FILE_UPLOADER'] = 'admin.upload_for_ckeditor'
@@ -58,6 +61,23 @@ def register_blueprints(app):
     app.register_blueprint(auth_bp, url_prefix='/auth')
 
 
+# 定义错误页面
+def register_errors(app):
+    # 设置404页面
+    @app.errorhandler(404)
+    def page_not_found(e):
+        return render_template('errors/404.html'), 404
+
+    # 设置500页面
+    @app.errorhandler(500)
+    def internal_server_error(e):
+        return render_template('errors/500.html'), 500
+
+    @app.errorhandler(CSRFError)
+    def handle_csrf_error(e):
+        return render_template('errors/404.html', description=e.description), 400
+
+
 # 定义模板上下文处理函数
 def register_template_context(app):
     @app.context_processor
@@ -66,7 +86,12 @@ def register_template_context(app):
         admin = Admin.query.first()
         categories = Category.query.order_by(Category.name).all()
         links = Link.query.order_by(Link.name).all()
-        return dict(admin=admin, categories=categories, links=links)
+        # unread_comments存储没被审核的评论
+        if current_user.is_authenticated:
+            unread_comments = Comment.query.filter_by(reviewed=False).count()
+        else:
+            unread_comments = None
+        return dict(admin=admin, categories=categories, links=links, unread_comments=unread_comments)
 
 
 # 生成命令
@@ -77,9 +102,9 @@ def register_commands(app):
     def initdb(drop):
         """Initialize the database."""
         if drop:
-            click.confirm('This operation will delete the database, do you want to continue?', abort=True)
+            click.confirm('这个操作将会删除数据库的数据,你确定继续这个操作吗?', abort=True)
             db.drop_all()
-            click.echo('Drop tables.')
+            click.echo('删除数据库')
         db.create_all()
         click.echo('初始化数据库')
 
@@ -91,21 +116,21 @@ def register_commands(app):
     def init(username, password):
         """Building Bluelog, just for you."""
 
-        click.echo('Initializing the database...')
+        click.echo('初始化数据库中.....')
         db.create_all()
 
         admin = Admin.query.first()
         if admin is not None:
-            click.echo('The administrator already exists, updating...')
+            click.echo('管理员账户已存在,正在更新管理员信息....')
             admin.username = username
             admin.set_password(password)
         else:
-            click.echo('Creating the temporary administrator account...')
+            click.echo('创建管理员账户中.....')
             admin = Admin(
                 username=username,
                 blog_title='蓝客',
                 blog_sub_title="我是副标题",
-                name='Admin',
+                name='hyf',
                 about='我是简介呀!'
             )
             admin.set_password(password)
@@ -113,12 +138,12 @@ def register_commands(app):
 
         category = Category.query.first()
         if category is None:
-            click.echo('Creating the default category...')
+            click.echo('创建默认分类中....')
             category = Category(name='默认')
             db.session.add(category)
 
         db.session.commit()
-        click.echo('Done.')
+        click.echo('完成!')
 
     # 生成虚拟数据命令
     @app.cli.command()
@@ -132,19 +157,16 @@ def register_commands(app):
         db.drop_all()
         db.create_all()
 
-        click.echo('Generating the administrator...')
-        fake_admin()
-
-        click.echo('Generating %d categories...' % category)
+        click.echo('创建 %d 个分类中...' % category)
         fake_categories(category)
 
-        click.echo('Generating %d posts...' % post)
+        click.echo('创建 %d 篇文章...' % post)
         fake_posts(post)
 
-        click.echo('Generating %d comments...' % comment)
+        click.echo('创建 %d 个评论...' % comment)
         fake_comments(comment)
 
-        click.echo('Generating links...')
+        click.echo('创建链接中...')
         fake_links()
 
-        click.echo('Done.')
+        click.echo('完成!')
