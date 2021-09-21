@@ -19,7 +19,7 @@ class BaseConfig(object):
     # debug设置
     DEBUG_TB_INTERCEPT_REDIRECTS = False
     # 配置数据库连接
-    # mysql + pymysql://user:password@hostip:port/databasename
+    # mysql + pymysql://user:password@hostip:port/数据名称
     SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:hu15879093053@localhost:3306/bluelog'
     SQLALCHEMY_TRACK_MODIFICATIONS = False  # True时会追踪对象修改并且发送信号,需要额外的内存
     # 文章每页的文章数
@@ -46,6 +46,14 @@ class BaseConfig(object):
     # ('theme name', 'display name')
     BLUELOG_THEMES = {'perfect_blue': 'Perfect Blue', 'black_swan': 'Black Swan'}
     BLUELOG_SLOW_QUERY_THRESHOLD = 1
+    # 上传文件设置
+    BLUELOG_UPLOAD_PATH = os.path.join(basedir, 'uploads')
+    if not os.path.exists(BLUELOG_UPLOAD_PATH):
+        os.mkdir(BLUELOG_UPLOAD_PATH)
+    BLUELOG_ALLOWED_IMAGE_EXTENSIONS = ['png', 'jpg', 'jpeg', 'gif']
+    # 富文本设置
+    CKEDITOR_ENABLE_CSRF = True
+    CKEDITOR_FILE_UPLOADER = 'admin.upload_image'
 
 
 # 俩种配置

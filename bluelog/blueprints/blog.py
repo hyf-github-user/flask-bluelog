@@ -60,7 +60,7 @@ def show_post(post_id):
     # 获取当前的页数
     page = request.args.get('page', 1, type=int)
     per_page = current_app.config['BLUELOG_COMMENT_PER_PAGE']
-    # 获取评论分页对象
+    # 获取评论分页对象(查询被管理员收到的评论)
     pagination = Comment.query.with_parent(post).filter_by(reviewed=True).order_by(Comment.timestamp.asc()).paginate(
         page, per_page)
     comments = pagination.items

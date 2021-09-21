@@ -32,7 +32,7 @@ class PostForm(MyBaseForm):
     title = StringField('主题', validators=[DataRequired(), Length(1, 60)])
     category = SelectField('分类', coerce=int, default=1)
     body = CKEditorField('内容', validators=[DataRequired()])
-    submit = SubmitField()
+    submit = SubmitField('发布')
 
     def __init__(self, *args, **kwargs):
         super(PostForm, self).__init__(*args, **kwargs)
@@ -43,11 +43,13 @@ class PostForm(MyBaseForm):
 # 分类表单
 class CategoryForm(MyBaseForm):
     name = StringField('名称', validators=[DataRequired(), Length(1, 30)])
-    submit = SubmitField()
+    submit = SubmitField('发布')
 
-    def validate_name(self, field):
+    # 静态方法,可以不使用实例进行调用
+    @staticmethod
+    def validate_name(field):
         if Category.query.filter_by(name=field.data).first():
-            raise ValidationError('Name already in use.')
+            raise ValidationError('分类名称已存在!')
 
 
 # 评论表单
@@ -56,7 +58,7 @@ class CommentForm(MyBaseForm):
     email = StringField('Email', validators=[DataRequired(), Email(), Length(1, 254)])
     site = StringField('地区', validators=[Optional(), URL(), Length(0, 255)])
     body = TextAreaField('评论', validators=[DataRequired()])
-    submit = SubmitField()
+    submit = SubmitField('发布')
 
 
 # 设置表单
@@ -65,7 +67,7 @@ class SettingForm(MyBaseForm):
     blog_title = StringField('大标题', validators=[DataRequired(), Length(1, 60)])
     blog_sub_title = StringField('小标题', validators=[DataRequired(), Length(1, 100)])
     about = CKEditorField('关于我', validators=[DataRequired()])
-    submit = SubmitField()
+    submit = SubmitField('更新')
 
 
 # 针对管理员的评论

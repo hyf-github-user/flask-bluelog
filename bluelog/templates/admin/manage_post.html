@@ -38,6 +38,7 @@
                     <td>{{ post.body|striptags|length }}</td>
                     <td>
                         <form class="inline" method="post"
+                                {#                              next是为当提交表格可以回到当前页面#}
                               action="{{ url_for('.set_comment', post_id=post.id, next=request.full_path) }}">
                             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
                             <button type="submit" class="btn btn-warning btn-sm">
