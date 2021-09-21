@@ -30,9 +30,8 @@ class BaseConfig(object):
     BLUELOG_COMMENT_PER_PAGE = 3
     # 管理文章的分页数
     BLUELOG_MANAGE_POST_PER_PAGE = 6
-    # 邮箱
-    BLUELOG_EMAIL = '1348977728@qq.com'
     # 邮箱配置
+    BLUELOG_EMAIL = '1348977728@qq.com'
     MAIL_DEBUG = True  # 开启debug，便于调试看信息
     MAIL_SUPPRESS_SEND = False  # 发送邮件，为True则不发送
     MAIL_SERVER = 'smtp.qq.com'  # 电子邮件服务器的主机名或IP地址
@@ -40,7 +39,7 @@ class BaseConfig(object):
     MAIL_USE_TLS = False  # 启用传输层安全协议
     MAIL_USE_SSL = True  # 启用安全套接层协议
     MAIL_USERNAME = '1348977728@qq.com'  # 邮件账户用户名
-    MAIL_PASSWORD = 'tqekpctqcoxkffeg'  # 邮件账户的密码
+    MAIL_PASSWORD = ''  # 邮件账户的密码
     MAIL_DEFAULT_SENDER = '1348977728@qq.com'  # 填邮箱，默认发送者
     # 主题设置
     # ('theme name', 'display name')

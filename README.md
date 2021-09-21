@@ -3,8 +3,8 @@
 写一个最好的博客系统
 
 #### 相关配置
-MySQL(得已知用户密码,还得创建bluelog数据库)
-
+1. MySQL(得已知用户密码,还得创建bluelog数据库,在settings更改用户名与密码,需提前建好数据库)
+2. mail设置: 在setting有参考
 #### 快速使用
 1. pipenv install --dev --python=3.7   pipenv下载相关依赖
 2. pipenv shell        进入pipenv虚拟环境shell

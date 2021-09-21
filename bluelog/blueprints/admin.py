@@ -163,7 +163,7 @@ def edit_link(link_id):
         link.name = form.name.data
         link.url = form.url.data
         db.session.commit()
-        flash('Link updated.', 'success')
+        flash('友情链接更新成功!', 'success')
         return redirect(url_for('.manage_link'))
     form.name.data = link.name
     form.url.data = link.url
