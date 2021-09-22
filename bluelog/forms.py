@@ -41,15 +41,13 @@ class PostForm(MyBaseForm):
 
 
 # 分类表单
-class CategoryForm(MyBaseForm):
+class CategoryForm(FlaskForm):
     name = StringField('名称', validators=[DataRequired(), Length(1, 30)])
-    submit = SubmitField('发布')
+    submit = SubmitField()
 
-    # 静态方法,可以不使用实例进行调用
-    @staticmethod
-    def validate_name(field):
+    def validate_name(self, field):
         if Category.query.filter_by(name=field.data).first():
-            raise ValidationError('分类名称已存在!')
+            raise ValidationError('分类已被创建!')
 
 
 # 评论表单

@@ -39,7 +39,7 @@ class BaseConfig(object):
     MAIL_USE_TLS = False  # 启用传输层安全协议
     MAIL_USE_SSL = True  # 启用安全套接层协议
     MAIL_USERNAME = '1348977728@qq.com'  # 邮件账户用户名
-    MAIL_PASSWORD = ''  # 邮件账户的密码
+    MAIL_PASSWORD = 'tqekpctqcoxkffeg'  # 邮件账户的密码
     MAIL_DEFAULT_SENDER = '1348977728@qq.com'  # 填邮箱，默认发送者
     # 主题设置
     # ('theme name', 'display name')

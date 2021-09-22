@@ -81,15 +81,13 @@ def delete_post(post_id):
 @admin_bp.route('/category/new', methods=['GET', 'POST'])
 @login_required
 def new_category():
-    # 创建表单
     form = CategoryForm()
     if form.validate_on_submit():
         name = form.name.data
-        # 创建新的分类
         category = Category(name=name)
         db.session.add(category)
         db.session.commit()
-        flash('分类创建成功!', 'success')
+        flash('分类已创建!', 'success')
         return redirect(url_for('.manage_category'))
     return render_template('admin/new_category.html', form=form)
 
