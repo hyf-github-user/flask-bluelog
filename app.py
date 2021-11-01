@@ -1,4 +1,3 @@
-from flask import render_template
 from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager
 # 导入模型,必须导入,要不然无法同步数据库
@@ -15,10 +14,6 @@ manager = Manager(app=app)  # flask-script命令
 migrate = Migrate(app=app, db=db)
 # 把命令添加到flask-script命令,MigrateCommand这个只有flask_migrate版本是2.5.3才具有的 此时的flask的版本必须是1.1.2
 manager.add_command('db', MigrateCommand)
-
-
-
-
 
 if __name__ == '__main__':
     manager.run()

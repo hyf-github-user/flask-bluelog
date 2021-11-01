@@ -49,7 +49,7 @@ class BaseConfig(object):
     BLUELOG_UPLOAD_PATH = os.path.join(basedir, 'uploads')
     if not os.path.exists(BLUELOG_UPLOAD_PATH):
         os.mkdir(BLUELOG_UPLOAD_PATH)
-    BLUELOG_ALLOWED_IMAGE_EXTENSIONS = ['png', 'jpg', 'jpeg', 'gif']
+    BLUELOG_ALLOWED_IMAGE_EXTENSIONS = ['ico', 'png', 'jpg', 'jpeg', 'gif']
     # 富文本设置
     CKEDITOR_ENABLE_CSRF = True
     CKEDITOR_FILE_UPLOADER = 'admin.upload_image'

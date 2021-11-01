@@ -26,10 +26,6 @@ def create_app():
     register_commands(app=app)
     # 定义错误页面
     register_errors(app=app)
-    # 富文本编辑器配置
-    # app.config['CKEDITOR_SERVE_LOCAL'] = True
-    # app.config['CKEDITOR_FILE_UPLOADER'] = 'admin.upload_for_ckeditor'
-    # app.config['MAIL_DEFAULT_SENDER'] = '1348977728@qq.com'  # 填邮箱，默认发送者
     return app
 
 
@@ -48,7 +44,7 @@ def register_extensions(app):
     # 初始化flask-login
     login_manager.init_app(app=app)
     # 初始化debug
-    toolbar.init_app(app=app)
+    # toolbar.init_app(app=app)
     # csrf验证
     csrf.init_app(app=app)
 

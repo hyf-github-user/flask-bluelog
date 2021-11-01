@@ -60,7 +60,7 @@ def edit_post(post_id):
         post.category = Category.query.get(form.category.data)
         db.session.commit()
         flash("文章更新成功!", 'success')
-        return redirect(url_for('blog.show_post'))
+        return redirect(url_for('blog.show_post', post_id=post.id))
     form.title.data = post.title
     form.body.data = post.body
     form.category.data = post.category_id
@@ -208,7 +208,7 @@ def manage_comment():
     elif filter_rule == 'admin':
         filtered_comments = Comment.query.filter_by(from_admin=True)
     else:
-        filtered_comments = Comment.query    # all的情况
+        filtered_comments = Comment.query  # all的情况
 
     pagination = filtered_comments.order_by(Comment.timestamp.desc()).paginate(page, per_page=per_page)
     comments = pagination.items
@@ -262,7 +262,7 @@ def settings():
 # 管理员上传文件
 @admin_bp.route('/uploads/<path:filename>')
 def get_image(filename):
-    return send_from_directory(current_app.config['BLUELOG_UPLOAD_PATH'], filename)
+    return send_from_directory(current_app.config['BLUELOG_UPLOAD_PATH'], filename, as_attachment=True)
 
 
 # 管理员上传
